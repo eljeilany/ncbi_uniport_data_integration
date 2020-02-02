@@ -1,0 +1,29 @@
+version: '3'
+services:
+    jupyter:
+        build: ./jupyter_code/
+        ports:
+          - "8888:8888"
+        links:
+          - PostgreSQL
+    PostgreSQL:
+        restart: always
+        image: sameersbn/postgresql:10-2
+        ports:
+        - "5432:5432"
+        environment:
+        - DEBUG=false
+    
+        - DB_USER=dataI
+        - DB_PASS=dataIntegration
+        - DB_NAME=genes_db
+        - DB_TEMPLATE=
+    
+        - DB_EXTENSION=
+    
+        - REPLICATION_MODE=
+        - REPLICATION_USER=
+        - REPLICATION_PASS=
+        - REPLICATION_SSLMODE=
+        volumes:
+        - /srv/docker/postgresql:/var/lib/postgresql
